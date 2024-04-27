@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "just for demo purposes",
   "main": "index.js",
-  
-  "scripts": {
+  "test": "jest",
+  "java-test": "javac -d target test/SimpleServerTest.java && mvn -f target/pom.xml test",
+  "build-java": "mvn package" ,
+    "scripts": {
     "start": "node index.mjs",
     "test": "jest"
     
