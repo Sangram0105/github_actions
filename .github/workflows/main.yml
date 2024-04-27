@@ -24,11 +24,10 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # - name: Run tests
-    #   run: npm test
+    # Optionally, you can run tests here if you have them.
 
     - name: Deploy to Railway
       if: success()
-      run: railway deploy --token $RAILWAY_TOKEN
+      run: railway up --token $RAILWAY_TOKEN
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
