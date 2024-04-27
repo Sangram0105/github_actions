@@ -1,7 +1,7 @@
-import * as http from 'http';
+import { createServer } from 'http';
 import { say } from 'cowsay';
 
-const server = http.createServer((req, res) => {
+const server = createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   const output = say({ text: 'mooooo' });
   res.end(output);
