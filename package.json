@@ -8,7 +8,7 @@
   "build-java": "mvn package" ,
     "scripts": {
     "start": "node index.mjs",
-    "test": "jest"
+    "test": "jest --detectOpenHandles=false"
     
   },
   "author": "The Coding Train",

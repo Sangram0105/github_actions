@@ -1,87 +1,108 @@
-# Coding Train Node Demo
+# Automated Deployment of Node.js Application to Railway Using GitHub Actions with Integrated Testing
 
-### Determmining your Node version (v18.18.2 is used in the tutorial)
-`node --version`
+This project demonstrates how to automate the deployment of a Node.js application to the Railway platform using GitHub Actions. It includes integrated testing to ensure the reliability and functionality of the deployed application. By leveraging GitHub Actions, you can streamline your development workflow, automatically deploy updates to your Railway environment, and run tests to validate the correctness of your code changes. This automated deployment and testing process helps maintain the quality and consistency of your application while reducing manual effort and minimizing the risk of errors.
 
-## Creating a new Node project 
+## Installation
 
-* Make a new Directory  
-`mkdir coding-train-node-demo`
+1. **Clone the Repository**: Start by cloning the repository to your local machine:
 
-* Opening / Changing Directories    
-`cd coding-train-node-demo`  - open the coding-train-node-demo directory  
-`.` -  this current directory  
-`..` - go back up a level  
-`code .` - open up the VSC editor  
+    ```bash
+    git clone [repository_url]
+    ```
 
-## Initializing a Node Project
-`npm init`
+2. **Navigate to the Project Directory**: Move into the directory containing the application:
 
-The utility will walk you some questions--you can enter answers or just say yes.
+    ```bash
+    cd [project_directory]
+    ```
 
-## Node packages
+3. **Install Dependencies**: Install the necessary dependencies using npm (Node.js package manager):
 
-[Node documentation](https://nodejs.org/docs/latest-v18.x/api/)
+    ```bash
+    npm install
+    ```
 
-The [File System](https://nodejs.org/docs/latest-v18.x/api/fs.html) package can be used to access local files on your computer, and is part of node system.
+## Configuration
 
-## Importing packages 
+1. **Environment Variables**: If your application requires environment variables, create a `.env` file in the root directory and define the variables accordingly.
 
-* CommonJS module  
-`const fs = require('fs');`
+## Running the Application
 
-* ES module  
-`import * as fs from 'fs'`
+1. **Start the Server**: To run the application locally, execute the following command:
 
-Note: to load an ES module you must edit the package.json file to set `"type": "module"`
+    ```bash
+    node index.js
+    ```
 
-## Finding Node Packages
+    This will start the server, and the application will be accessible at http://localhost:3000 by default.
 
-* [npmjs](https://www.npmjs.com)
+2. **Accessing the Application**: Open your web browser and navigate to http://localhost:3000 to access the application.
 
-Some package I will be using:
-* [discord.js](https://www.npmjs.com/package/discord.js)  
-* [canvas](https://www.npmjs.com/package/canvas)  
-* [cowsay](https://www.npmjs.com/package/cowsay)  
+## Automated Unit Tests
 
-`npm install cowsay` or `npm i cowsay`
+This application includes automated unit tests to verify its functionality. To run the tests, execute the following command:
 
-This will add the package to the package.json as a dependencies. It will also add a new directory called node_modules.
+```bash
+npm test
+ ```
 
-## Things to consider when you are looking for packages
+# GitHub Actions Pipeline
 
-* When was it created?
-* Is it actively maintained?
-* Look at Github repo - are there any recent commits?  
-* [cowsay repo](https://github.com/piuccio/cowsay)
+The GitHub Actions pipeline for this project is defined in the `.github/workflows` directory. It consists of steps for linting, testing, and deploying the application.
 
-## Importing the cowsay package
+## Manually Triggering the Pipeline
 
-* Importing everything from a package  
-`import * as cowsay from 'cowsay'`
+To manually trigger the pipeline, follow these steps:
 
-* Importing individual functions from a package  
-`import { say } from 'cowsay'`
+1. **Push Changes to a Branch**: Push your changes to a branch in the repository.
 
-## Downloading and installing an existing Node project
+2. **Create a Pull Request**: Create a pull request against the main branch.
 
-[Discord-Bot-Examples](https://github.com/CodingTrain/Discord-Bot-Examples/)
+3. **Automatic Pipeline Run**: GitHub Actions will automatically run the pipeline.
 
-You must install the dependencies for the project.  
-`npm install`
+4. **View Pipeline Status and Logs**: View the status and logs of the pipeline in the Actions tab of your GitHub repository.
 
-## Downloading and installing the Coding Train website
+## Deployment to Railway
 
-[Livestream discussing installation of the Coding Train website](https://www.youtube.com/watch?v=mSDjPcHoMbg&t=1999s)
+To deploy the application to Railway, follow these steps:
 
-When updating the website, it is helpful to run the website locally in order to quickly see the changes made. Make sure you have Node.js version `18.x` installed and then perform the following steps:
+1. **Generate Railway Token**:
+   - Log in to your Railway account.
+   - Navigate to your account settings or profile settings.
+   - Find the section for API tokens or project tokens.
+   - Generate a new token with sufficient permissions for deploying applications.
 
-1. Clone down the repo to your computer and `cd` into the folder
-2. Run `npm install`
-3. Run `npm run dev`
+2. **Add Token to GitHub Repository Secrets**:
+   - Go to your GitHub repository.
+   - Click on the "Settings" tab.
+   - In the left sidebar, click on "Secrets".
+   - Click on "New repository secret".
+   - Name the secret something like `RAILWAY_TOKEN`.
+   - Paste the token you generated from Railway into the "Value" field.
+   - Click "Add secret" to save it.
 
-This will start a local server and the website will now be accessible on [localhost:8000](http://localhost:8000). Changes to most files will be auto-updated in the browser while the website is running.
+3. **Modify GitHub Actions Workflow**:
+   - Open the GitHub Actions workflow file in your repository (usually located at `.github/workflows` directory).
+   - Find the step where the deployment to Railway occurs.
+   - Update the workflow to use the secret you created. Typically, this involves referencing the secret using `${{ secrets.RAILWAY_TOKEN }}` syntax.
 
-**Note:** In some cases, specially when updating loaded content, you need to restart the local server with `npm run dev`.
-And in some cases that may fail because of Gatsby's cache usage. If you run `npm run clean` before `npm run dev`, that should fix it.
+4. **Commit and Push Changes**:
+   - After making the necessary modifications to the GitHub Actions workflow file, commit the changes and push them to your repository.
+
+5. **Verify Deployment**:
+   - Once the changes are pushed, GitHub Actions should automatically trigger a new pipeline run.
+   - Check the pipeline logs to ensure that the deployment step successfully uses the Railway token from the repository secrets.
+
+
+
+
+# Conclusion
+
+Thank you for exploring the Automated Deployment of Node.js Application to Railway Using GitHub Actions! This project demonstrates an automated deployment process for a Node.js application, integrating GitHub Actions for continuous integration and deployment to the Railway platform.
+
+To access the deployed application, visit the following link: [GitHub Actions Production Deployment](https://githubactions-production-55ec.up.railway.app)
+
+We hope you find this automated deployment process helpful in maintaining the quality and consistency of your Node.js applications. Feel free to explore the project repository and contribute to its development.
+
+If you have any questions or feedback, don't hesitate to reach out. Happy coding!
 
