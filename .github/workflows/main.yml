@@ -24,7 +24,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # Optionally, you can run tests here if you have them.
+    - name: run test cases 
+      run: npm test
 
     - name: Deploy to Railway
       if: success()
